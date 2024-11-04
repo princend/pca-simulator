@@ -1,6 +1,10 @@
 // src/App.js
 import React, { useState } from "react";
 import { calculatePCA } from "./pca";
+import { Scatter } from "react-chartjs-2";
+import { Chart as ChartJS, ScatterController, LinearScale, PointElement, Tooltip, Legend } from "chart.js";
+
+ChartJS.register(ScatterController, LinearScale, PointElement, Tooltip, Legend);
 
 function App() {
     const [data, setData] = useState([]);
@@ -20,7 +24,11 @@ function App() {
     const handleCalculate = () => {
         if (data.length === 0) return;
         const pcaResult = calculatePCA(data);
-        setResult(pcaResult);
+        const transformedData = data.map((row, index) => ({
+            x: row[0] * pcaResult.firstComponent[0] + row[1] * pcaResult.secondComponent[0],
+            y: row[0] * pcaResult.firstComponent[1] + row[1] * pcaResult.secondComponent[1],
+        }));
+        setResult(transformedData);
     };
 
     return (
@@ -40,9 +48,24 @@ function App() {
 
             {result && (
                 <div>
-                    <h2>Results</h2>
-                    <p>First Component: {JSON.stringify(result.firstComponent)}</p>
-                    <p>Second Component: {JSON.stringify(result.secondComponent)}</p>
+                    <h2>PCA Results (2D Projection)</h2>
+                    <Scatter
+                        data={{
+                            datasets: [
+                                {
+                                    label: "PCA Projection",
+                                    data: result,
+                                    backgroundColor: "rgba(75,192,192,1)",
+                                },
+                            ],
+                        }}
+                        options={{
+                            scales: {
+                                x: { type: "linear", position: "bottom" },
+                                y: { type: "linear" },
+                            },
+                        }}
+                    />
                 </div>
             )}
         </div>
