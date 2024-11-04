@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pca-simulator/static/css/main.e6c13ad2.css",
+    "main.js": "/pca-simulator/static/js/main.4378d09c.js",
+    "static/js/453.c636e10a.chunk.js": "/pca-simulator/static/js/453.c636e10a.chunk.js",
+    "index.html": "/pca-simulator/index.html",
+    "main.e6c13ad2.css.map": "/pca-simulator/static/css/main.e6c13ad2.css.map",
+    "main.4378d09c.js.map": "/pca-simulator/static/js/main.4378d09c.js.map",
+    "453.c636e10a.chunk.js.map": "/pca-simulator/static/js/453.c636e10a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.4378d09c.js"
+  ]
+}
